@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap" async defer></script>
+    <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200" rel="stylesheet">
+    
+</head>
+    
+<body>
+    <div class="container">
+        <form action="" id="signupForm">
+            <div class="alert">Please fill out the whole form!</div>
+            <b><p class="dblue">Please fill out all sections.</p></b>
+            <div class="inputBox">
+                <input type="text" id="name" placeholder="Your name...." />
+            </div>
+
+            <div class="inputBox">
+                <input type="email" id="emailid" placeholder="Your Email....." />
+            </div>
+
+            <div class="inputBox">
+                <input id="address" type="text" placeholder="Enter your address">
+            </div>
+
+            <div class="inputBox">
+              <input id="password" type="text" placeholder="Create a password">
+          </div>
+
+            <div class="inputBox">
+              <div class="dblue">
+                <div>Spoken Languages:</div>
+                <label>
+                    <input type="checkbox" name="languages" value="English"> English
+                </label>
+                <label>
+                    <input type="checkbox" name="languages" value="Chinese"> Chinese
+                </label>
+                <label>
+                    <input type="checkbox" name="languages" value="Spanish"> Spanish
+                </label>
+              </div>
+            </div>
+
+            <div class="inputBox">
+                <textarea id="msgContent" cols="30" rows="10" placeholder="Message"></textarea>
+            </div>
+
+            <div class="inputBox">
+                <button type="submit">Submit</button>
+            </div>
+            <div id="thankYouMessage" style="display: none;" class="alert">Thanks for filling out the form! We will put you on the map shortly.</div>
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+<script src="map.js"></script>
+<script type = "module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro",
+    authDomain: "femmehacks-415310.firebaseapp.com",
+    databaseURL: "https://femmehacks-415310-default-rtdb.firebaseio.com",
+    projectId: "femmehacks-415310",
+    storageBucket: "femmehacks-415310.appspot.com",
+    messagingSenderId: "280764623310",
+    appId: "1:280764623310:web:cabcf63e223f488f15239f"
+
+  };
+
+
+firebase.initializeApp(firebaseConfig);
+
+
+var signupFormDB = firebase.database().ref("signupForm");
+
+document.getElementById("signupForm").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+
+
+  var name = getElementVal("name");
+  var emailid = getElementVal("emailid");
+  var address = getElementVal("address");
+  var msgContent = getElementVal("msgContent");
+  var password = getElementVal("password");
+
+  if(name === "" || emailid === "" || address === "" || msgContent === "") {
+
+    showAlert("Please fill in all fields.", false);
+    return;
+  }
+
+
+  var languages = getCheckedLanguages();
+  saveMessages(name, emailid, address, msgContent, languages, password);
+
+  showAlert("Thanks for filling out the form! We will put you on the map shortly.", true);
+  setTimeout(() => {
+    document.getElementById("signupForm").reset();
+  }, 3000);
+  window.open("signin.html");
+
+}
+
+
+function showAlert(message, isSuccess) {
+  var alertBox = document.querySelector(".alert");
+  alertBox.style.display = "block";
+  alertBox.textContent = message;
+  alertBox.style.backgroundColor = isSuccess ? "#d4edda" : "#f8d7da";
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 3000);
+}
+
+const saveMessages = (name, emailid, address, msgContent, languages, password) => {
+  var newSignupForm = signupFormDB.push();
+
+  newSignupForm.set({
+    name: name,
+    emailid: emailid,
+    address: address,
+    msgContent: msgContent,
+    languages: languages,
+    password: password,
+  });
+};
+
+const getElementVal = (id) => {
+  return document.getElementById(id).value;
+};
+const getCheckedLanguages = () => {
+            const checkboxes = document.getElementsByName("languages");
+            const checkedLanguages = [];
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    checkedLanguages.push(checkbox.value);
+                }
+            });
+            return checkedLanguages;
+        };
+  </script> 
+
+</body>
+<div id = "map"></div>
+</html>
