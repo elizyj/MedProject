@@ -8,39 +8,24 @@
     <title>Firebase</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap" async defer></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
     
-    function initMap() {
-
-        var input = document.getElementById('address');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-
-        autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-                alert("No details available for input: '" + place.name + "'");
-                return;
-            }
-
-        });
-    }
-</script>
+</head>
+    
 <body>
    
     <div class="container">
         <form action="" id="signupForm">
-            <div class="alert"></div>
+            <div class="alert">Please fill out the whole form!</div>
 
             <div class="inputBox">
-                <input type="text" id="name" placeholder="Your name..." />
+                <input type="text" id="name" placeholder="Your name...." />
             </div>
 
             <div class="inputBox">
-                <input type="email" id="emailid" placeholder="Your Email..." />
+                <input type="email" id="emailid" placeholder="Your Email....." />
             </div>
 
             <div class="inputBox">
@@ -66,12 +51,14 @@
             <div class="inputBox">
                 <button type="submit">Submit</button>
             </div>
+            <div id="thankYouMessage" style="display: none;" class="alert">Thanks for filling out the form! We will put you on the map shortly.</div>
         </form>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+<script src="map.js"></script>
 <script type = "module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 
@@ -83,12 +70,13 @@ const firebaseConfig = {
     storageBucket: "femmehacks-415310.appspot.com",
     messagingSenderId: "280764623310",
     appId: "1:280764623310:web:cabcf63e223f488f15239f"
+
   };
 
-// initialize firebase
+
 firebase.initializeApp(firebaseConfig);
 
-// reference your database
+
 var signupFormDB = firebase.database().ref("signupForm");
 
 document.getElementById("signupForm").addEventListener("submit", submitForm);
@@ -96,24 +84,37 @@ document.getElementById("signupForm").addEventListener("submit", submitForm);
 function submitForm(e) {
   e.preventDefault();
 
+
   var name = getElementVal("name");
   var emailid = getElementVal("emailid");
   var address = getElementVal("address");
   var msgContent = getElementVal("msgContent");
-  var languages = getCheckedLanguages();
 
+  if(name === "" || emailid === "" || address === "" || msgContent === "") {
+
+    showAlert("Please fill in all fields.", false);
+    return;
+  }
+
+
+  var languages = getCheckedLanguages();
   saveMessages(name, emailid, address, msgContent, languages);
 
-  //   enable alert
-  document.querySelector(".alert").style.display = "block";
-
-  //   remove the alert
+  showAlert("Thanks for filling out the form! We will put you on the map shortly.", true);
   setTimeout(() => {
-    document.querySelector(".alert").style.display = "none";
+    document.getElementById("signupForm").reset();
   }, 3000);
+}
 
-  //   reset the form
-  document.getElementById("signupForm").reset();
+
+function showAlert(message, isSuccess) {
+  var alertBox = document.querySelector(".alert");
+  alertBox.style.display = "block";
+  alertBox.textContent = message;
+  alertBox.style.backgroundColor = isSuccess ? "#d4edda" : "#f8d7da";
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 3000);
 }
 
 const saveMessages = (name, emailid, address, msgContent, languages) => {
@@ -141,7 +142,7 @@ const getCheckedLanguages = () => {
             });
             return checkedLanguages;
         };
-
   </script> 
+
 </body>
 </html>
