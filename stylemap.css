@@ -1,0 +1,31 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+    width: 90%;
+    position: absolute;
+    top: 200px;
+    left: 0px;
+}
+#maplogo {
+    position: absolute;
+    height: 120px;
+    left: 47%;
+    top: 10px;
+}
+
+#address {
+    position: absolute;
+    top: 18%;
+    left: 38%;
+    width: 400px; 
+    padding: 10px;
+    font-size: 20px;
+    border: 2px solid #fff; 
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
