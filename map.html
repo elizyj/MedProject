@@ -34,14 +34,25 @@
                     var addressValue;
                     var emailIDvalue;
                     var othervalue;
+                    var languagesValue
                     childSnapshot.forEach(function(grandChildSnapshot) {
                         var grandChildKey = grandChildSnapshot.key;
                         if (grandChildKey === "emailid") {
                             emailIDvalue = grandChildSnapshot.val();
                         }
+                        console.log(grandChildKey);
+                        if (grandChildKey === "languages") {
+                            // Access the children of "languages" and print them to the console
+                            grandChildSnapshot.forEach(function(languageSnapshot) {
+                                if (languageSnapshot.val() != undefined) {
+                                    languagesValue = languageSnapshot.val()
+                                console.log(languagesValue);
+                                }
+                            });
+                        }
                         if (grandChildKey === "name") {
                             nameValue = grandChildSnapshot.val();
-                            addMarkerFromAddress(addressValue, nameValue, emailIDvalue, othervalue);
+                            addMarkerFromAddress(addressValue, nameValue, emailIDvalue, othervalue, languagesValue);
                         }
                         if (grandChildKey === "msgContent") {
                             othervalue = grandChildSnapshot.val();
@@ -60,10 +71,19 @@
         </script>
 
 <script src="map.js"></script>
-<script>        function addMarkerFromAddress(address, name, email, other) {
+<script>        function addMarkerFromAddress(address, name, email, other, languages) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, function(results, status) {
         if (status === 'OK') {
+            if (languages !== "Chinese" && $('#lang-switch').val() == "zhe") {
+                    return; // Skip adding marker
+                }
+            if (languages == "English" && $('#lang-switch').val() !== "en") {
+                    return; // Skip adding marker
+            }  
+            if (languages == "Spanish" && $('#lang-switch').val() !== "es") {
+                    return; // Skip adding marker
+            }  
         var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
@@ -78,7 +98,7 @@
 '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
 '<div id="bodyContent">' +
 "<p><b>Address: </b>" + address + "</p>" +
-"<p><b>Languages Spoken:</b>, list of languages" +
+"<p><b>Languages Spoken: </b>" + languages +
 "<p><b>Contact information: </b>" + email +
     "<p><b>Other information: </b>" + other +
 "</div>" +
