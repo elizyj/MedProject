@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps API with Places Autocomplete</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+<script>        function addMarkerFromAddress(address) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function(results, status) {
+                if (status === 'OK') {
+                var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: "testing",
+                    });
+
+                    // Create InfoWindow for marker
+                    var infowindow = new google.maps.InfoWindow({
+                        content: '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+    "sandstone rock formation in the southern part of the " +
+    "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+    "south west of the nearest large town, Alice Springs; 450&#160;km " +
+    "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+    "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+    "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+    "Aboriginal people of the area. It has many springs, waterholes, " +
+    "rock caves and ancient paintings. Uluru is listed as a World " +
+    "Heritage Site.</p>" +
+    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+    "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+    "(last visited June 22, 2009).</p>" +
+    "</div>" +
+    "</div>",
+                        ariaLabel: "Testing",
+                    });
+
+                    // Open InfoWindow when marker is clicked
+                    marker.addListener("click", () => {
+                        infowindow.open({
+                            anchor: marker,
+                            map,
+                        });
+                        console.log("cliked");
+                    });
+
+                    console.log("Marker added for address:", address);
+                } else {
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+            
+        }
+
+        
+</script>
+<script type = "module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro",
+        authDomain: "femmehacks-415310.firebaseapp.com",
+        databaseURL: "https://femmehacks-415310-default-rtdb.firebaseio.com",
+        projectId: "femmehacks-415310",
+        storageBucket: "femmehacks-415310.appspot.com",
+        messagingSenderId: "280764623310",
+        appId: "1:280764623310:web:cabcf63e223f488f15239f"
+      };
+    
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+    
+            // Reference the database
+            const dbRef = firebase.database().ref("signupForm");
+    
+            dbRef.once("value")
+      .then(function(snapshot) 
+        {
+        snapshot.forEach(function(childSnapshot) {
+          var childKey = childSnapshot.key;
+          // Perform further operations with each child key if needed
+          childSnapshot.forEach(function(grandChildSnapshot) {
+            var grandChildKey = grandChildSnapshot.key;
+ 
+            // Perform further operations with each grandchild key if needed
+            if (grandChildKey === "address") {
+              var addressValue = grandChildSnapshot.val();
+              
+              addMarkerFromAddress(addressValue);
+                    console.log("Address:", addressValue);
+                   
+          }
+          });
+        });
+      });
+    
+      
+        </script>
+
+<script src="map.js"></script>
+
+
+</head>
+<body>
+    <input id="address" type="text" placeholder="Enter your address">
+    <div id="map" style="height: 400px; width: 100%;"></div>
+</body>
+</html>
