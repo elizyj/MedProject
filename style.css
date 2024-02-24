@@ -2,8 +2,12 @@
     rgb(158, 217, 250);
     }
 
-body{font-family: "Montserrat";
-     
+.dblue{ 
+    color: rgb(85, 189, 249);
+}
+
+body{
+    font-family: "Montserrat";
     background-color:rgb(158, 217, 250);
     color: rgb(255, 255, 255);
     }
