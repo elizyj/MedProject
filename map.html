@@ -67,14 +67,12 @@
             })
             .catch(error => console.log(error));
     </script>
-     <select id="lang-switch">
-        <option value="en">English</option>
+    
+    <select id="lang-switch">
+        <option value="en" selected>English</option>
         <option value="es">Español</option>
-        <option value="zh" selected>普通話</option>
+        <option value="zh">普通話</option>
       </select>
-        </script>
-
-      
         </script>
 
 <script src="map.js"></script>
@@ -82,9 +80,9 @@
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, function(results, status) {
         if (status === 'OK') {
-            if (languages !== "Chinese") {
+            if (languages !== "English") {
                     return; // Skip adding marker
-                } 
+            }  
         var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
@@ -94,14 +92,14 @@
             // Create InfoWindow for marker
             var infowindow = new google.maps.InfoWindow({
                 content: '<div id="content">' +
-                    '<div id="siteNotice">' +
+'<div id="siteNotice">' +
 "</div>" +
 '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
 '<div id="bodyContent">' +
-"<p><b>地址: </b>" + address + "</p>" + 
-"<p><b>使用语言: </b>" + languages +
-"<p><b>联系信息: </b>" + email +
-    "<p><b>其他信息: </b>" + other +
+"<p><b>Address: </b>" + address + "</p>" +
+"<p><b>Languages Spoken: </b>" + languages +
+"<p><b>Contact information: </b>" + email +
+    "<p><b>Other information: </b>" + other +
 "</div>" +
 "</div>",
                 ariaLabel: "Testing",
@@ -131,7 +129,7 @@
 </head>
 <body>
     <img src="logo.png" id = "maplogo">
-    <input id="address" type="text" placeholder="输入您的地址">
+    <input id="address" type="text" placeholder="Enter your address">
     <div id="map"></div>
     <style>
         #map {
