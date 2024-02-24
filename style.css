@@ -1,0 +1,140 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Carlito', sans-serif;
+}
+
+.inputBox {
+    margin-bottom: 20px;
+}
+
+.inputBox input[type="text"],
+.inputBox input[type="email"],
+.inputBox textarea {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Carlito', sans-serif;
+}
+
+.inputBox textarea {
+    resize: vertical; 
+}
+
+.inputBox label {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.button {
+    padding: 20px 40px; 
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(85, 189, 249);
+    color: white;
+    border: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.alert {
+    display: none;
+    margin-bottom: 20px;
+    color: #D8000C;
+    background-color: #FFD2D2;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.divLanguages {
+    margin-bottom: 20px;
+}
+
+.divLanguages div,
+.divLanguages label {
+    display: block;
+}
+
+
+.inputBox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .button {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+}
+
+button[type="submit"] {
+    background-color: rgb(85, 189, 249);
+    color: white;
+    padding: 15px 30px;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    outline: none; 
+    font-family: 'Carlito', sans-serif;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(42, 129, 180);
+}
+
+
+#lang-switch {
+    font-family: 'Carlito', sans-serif;
+    font-size: 35px;
+    position: absolute;
+    padding: 20px 40px;
+    background-color: rgb(132, 208, 255);
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    width: 500px;
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    font-family: 'Carlito', sans-serif;
+    padding: 20px 60px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #45a049;
+    
+}
