@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Map</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap" async defer></script>
+    <title>Google Maps API with Places Autocomplete</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap&language=zh-CN" async defer></script>
+    
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
@@ -67,13 +68,7 @@
             })
             .catch(error => console.log(error));
     </script>
-     <select id="lang-switch">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="zh" selected>普通話</option>
-      </select>
-        </script>
-
+    
       
         </script>
 
@@ -82,9 +77,15 @@
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, function(results, status) {
         if (status === 'OK') {
-            if (languages !== "Chinese") {
+            if (languages !== "Chinese" && $('#lang-switch').val() == "zhe") {
                     return; // Skip adding marker
-                } 
+                }
+            if (languages == "English" && $('#lang-switch').val() !== "en") {
+                    return; // Skip adding marker
+            }  
+            if (languages == "Spanish" && $('#lang-switch').val() !== "es") {
+                    return; // Skip adding marker
+            }  
         var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
@@ -94,7 +95,7 @@
             // Create InfoWindow for marker
             var infowindow = new google.maps.InfoWindow({
                 content: '<div id="content">' +
-                    '<div id="siteNotice">' +
+'<div id="siteNotice">' +
 "</div>" +
 '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
 '<div id="bodyContent">' +
@@ -122,7 +123,6 @@
             console.log('Geocode was not successful for the following reason: ' + status);
         }
     });
-    
 }
 
 
@@ -132,23 +132,6 @@
 <body>
     <img src="logo.png" id = "maplogo">
     <input id="address" type="text" placeholder="输入您的地址">
-    <div id="map"></div>
-    <style>
-        #map {
-            
-    height: 600px; /* Adjust height as needed */
-    width: 80%; /* Adjust width as needed */
-    margin: 0 auto; /* Center horizontally */
-    border: 2px solid black; /* Add a black border */
-
-        }
-    </style>
-    <style>
-        #map-container {
-            width: 100%;
-            height: 400px;
-            
-        }
-    </style>
+    <div id="map" style="height: 600px; width: 100%;"></div>
 </body>
 </html>
