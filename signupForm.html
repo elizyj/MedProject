@@ -32,6 +32,7 @@
                 <input id="address" type="text" placeholder="Enter your address">
             </div>
             <div class="inputBox">
+              <div class="dblue">
                 <div>Spoken Languages:</div>
                 <label>
                     <input type="checkbox" name="languages" value="English"> English
@@ -42,6 +43,7 @@
                 <label>
                     <input type="checkbox" name="languages" value="Spanish"> Spanish
                 </label>
+              </div>
             </div>
 
             <div class="inputBox">
@@ -104,6 +106,8 @@ function submitForm(e) {
   setTimeout(() => {
     document.getElementById("signupForm").reset();
   }, 3000);
+  window.open("signin.html");
+
 }
 
 
