@@ -1,0 +1,212 @@
+.mblue{color: 
+    rgb(158, 217, 250);
+    }
+
+.dblue{ 
+    color: rgb(85, 189, 249);
+}
+
+body{
+    font-family: "Montserrat";
+    background-color:rgb(158, 217, 250);
+    color: rgb(0, 0, 0);
+    }
+
+title{
+    font-family: 'Montserrat';
+    font-size: 60px;
+    
+}
+
+.word {
+    top: 60%;
+    left: 50%
+}
+
+img {
+    position: absolute;
+    top: 65%;
+    left: 75%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    margin-left: 20px;
+    }
+
+.logo {
+    position: absolute;
+    top: 13%;
+    left: 30%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 125px;
+    margin-left: 20px;
+}
+
+.title {
+    
+    padding-left: 510px;
+    font-size: 50px;
+    top: 15%;
+    }
+
+.c {
+    display: inline-block;
+    top: 20%;
+    left: 30%;
+    height: 130px; /*sets height of element*/
+    background: rgb(85, 189, 249); /*sets the background of this element (here a solid colour)*/
+    /*transition: all 0.6s; sets a transition (for hover effect)*/
+    margin: auto;
+    width: 100%;
+    line-height: 0px; /*for this, it sets vertical alignment*/
+    }
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Montserrat';
+}
+
+.inputBox {
+    margin-bottom: 20px;
+}
+
+.inputBox input[type="text"],
+.inputBox input[type="email"],
+.inputBox textarea {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Montserrat';
+}
+
+.inputBox textarea {
+    resize: vertical; 
+}
+
+.inputBox label {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.button {
+    padding: 20px 40px; 
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(85, 189, 249);
+    color: white;
+    border: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.alert {
+    display: none;
+    margin-bottom: 20px;
+    color: #D8000C;
+    background-color: #FFD2D2;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.divLanguages {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.divLanguages div,
+.divLanguages label {
+    color: black;
+    display: block;
+}
+
+
+.inputBox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .button {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+}
+
+button[type="submit"] {
+    background-color: rgb(85, 189, 249);
+    color: white;
+    padding: 15px 30px;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    outline: none; 
+    font-family: 'Montserrat';
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(42, 129, 180);
+}
+
+
+#lang-switch {
+    font-family: 'Montserrat';
+    font-size: 35px;
+    position: absolute;
+    padding: 20px 40px;
+    background-color: rgb(132, 208, 255);
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    width: 500px;
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    font-family: 'Montserrat';
+    padding: 20px 60px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #45a049;
+    
+}
