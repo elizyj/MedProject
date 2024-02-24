@@ -1,10 +1,13 @@
 $(document).ready(function() {
-    $('[lang="es"], [lang="zh"]').hide();
+    $('[lang="es"], [lang="zh"], [lang="en"]').hide();
 
     $('#lang-switch').change(function () {
         var lang = $(this).val();
         $('[lang]').hide();
         switch (lang) {
+            case 'ch': 
+                $('[lang="ch"]').show();
+                break;
             case 'en': 
                 $('[lang="en"]').show();
                 break;
@@ -15,7 +18,7 @@ $(document).ready(function() {
                 $('[lang="zh"]').show();
                 break;
             default:
-                $('[lang="en"]').show();
+                $('[lang="ch"]').show();
         }
     });
 });
