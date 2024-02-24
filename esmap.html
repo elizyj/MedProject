@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps API with Places Autocomplete</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro&libraries=places&callback=initMap&language=es" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+<link rel="stylesheet" href="stylemap.css">
+
+<script type = "module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyA0hB1RUbLCXhWzoIXt3RElHf4fM_9j6ro",
+        authDomain: "femmehacks-415310.firebaseapp.com",
+        databaseURL: "https://femmehacks-415310-default-rtdb.firebaseio.com",
+        projectId: "femmehacks-415310",
+        storageBucket: "femmehacks-415310.appspot.com",
+        messagingSenderId: "280764623310",
+        appId: "1:280764623310:web:cabcf63e223f488f15239f"
+      };
+    
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+    
+            // Reference the database
+            const dbRef = firebase.database().ref("signupForm");
+    
+            dbRef.once("value")
+            .then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var nameValue;
+                    var addressValue;
+                    var emailIDvalue;
+                    var othervalue;
+                    var languagesValue
+                    childSnapshot.forEach(function(grandChildSnapshot) {
+                        var grandChildKey = grandChildSnapshot.key;
+                        if (grandChildKey === "emailid") {
+                            emailIDvalue = grandChildSnapshot.val();
+                        }
+                        console.log(grandChildKey);
+                        if (grandChildKey === "languages") {
+                            // Access the children of "languages" and print them to the console
+                            grandChildSnapshot.forEach(function(languageSnapshot) {
+                                if (languageSnapshot.val() != undefined) {
+                                    languagesValue = languageSnapshot.val()
+                                console.log(languagesValue);
+                                }
+                            });
+                        }
+                        if (grandChildKey === "name") {
+                            nameValue = grandChildSnapshot.val();
+                            addMarkerFromAddress(addressValue, nameValue, emailIDvalue, othervalue, languagesValue);
+                        }
+                        if (grandChildKey === "msgContent") {
+                            othervalue = grandChildSnapshot.val();
+                        }
+                        if (grandChildKey === "address") {
+                            addressValue = grandChildSnapshot.val();
+                        }
+                    });
+                    
+                });
+            })
+            .catch(error => console.log(error));
+    </script>
+    
+      
+        </script>
+
+<script src="map.js"></script>
+<script>        function addMarkerFromAddress(address, name, email, other, languages) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address }, function(results, status) {
+        if (status === 'OK') {
+            if (languages !== "Chinese" && $('#lang-switch').val() !== "zhe") {
+                    return; // Skip adding marker
+                }
+            if (languages == "English" && $('#lang-switch').val() !== "en") {
+                    return; // Skip adding marker
+            }  
+            if (languages == "Spanish" && $('#lang-switch').val() == "es") {
+                    return; // Skip adding marker
+            }  
+        var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location,
+                title: "testing",
+            });
+            const dbRef = firebase.database().ref("signupForm");
+            // Create InfoWindow for marker
+            var infowindow = new google.maps.InfoWindow({
+                content: '<div id="content">' +
+'<div id="siteNotice">' +
+"</div>" +
+'<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
+'<div id="bodyContent">' +
+"<p><b>Dirección: </b>" + address + "</p>" +
+"<p><b>Idiomas hablados: </b>" + languages +
+"<p><b>Información del contacto: </b>" + email +
+    "<p><b>Otra información: </b>" + other +
+"</div>" +
+"</div>",
+                ariaLabel: "Testing",
+            });
+
+
+            // Open InfoWindow when marker is clicked
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+                console.log("cliked");
+            });
+
+            console.log("Marker added for address:", address);
+        } else {
+            console.log('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+    
+}
+
+
+</script>
+
+</head>
+<body>
+    <img src="logo.png" id = "maplogo">
+    <input id="address" type="text" placeholder="Introduce tu dirección">
+    <div id="map" style="height: 600px; width: 100%;"></div>
+</body>
+</html>
