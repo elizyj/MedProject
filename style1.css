@@ -1,5 +1,5 @@
 body {
-    font-family: 'Carlito', sans-serif;
+    font-family: "Montserrat";
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -22,6 +22,7 @@ form {
 }
 
 .form-group {
+    font-family: "Montserrat";
     margin-bottom: 20px;
 }
 
@@ -38,6 +39,7 @@ input[type="password"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: "Montserrat";
 }
 
 button {
@@ -47,8 +49,42 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: "Montserrat";
 }
 
 button:hover {
     background-color: rgb(42, 129, 180);
 }
+
+.logo {
+    position: absolute;
+    top: 13%;
+    left: 30%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 125px;
+    margin-left: 20px;
+}
+
+
+b {
+    display: inline-block;
+    top: 20%;
+    left: 30%;
+    height: 130px; /*sets height of element*/
+    background: rgb(85, 189, 249); /*sets the background of this element (here a solid colour)*/
+    /*transition: all 0.6s; sets a transition (for hover effect)*/
+    margin: auto;
+    width: 100%;
+    /*padding-left: 20px; /*sets 'padding'
+    padding-right: 20px; /*sets 'padding'*/
+    line-height: 0px; /*for this, it sets vertical alignment*/
+    }
+
+.title {
+    margin: auto;
+    padding-left: 510px;
+    }
