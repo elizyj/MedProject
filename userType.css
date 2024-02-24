@@ -1,0 +1,136 @@
+.mblue{color: 
+    rgb(133, 211, 255);
+    }
+
+body{font-family: "Montserrat";
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    }
+
+title{
+    font-family: 'Montserrat';
+    font-size: 60px;
+    
+}
+
+
+img {
+    position: absolute;
+    top: 65%;
+    left: 75%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    margin-left: 20px;
+    }
+
+.imgp {
+    position: absolute;
+    top: 65%;
+    left: 5%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    margin-left: 20px;
+    }
+
+.logo {
+    position: absolute;
+    top: 13%;
+    left: 30%;
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    width: 125px;
+    margin-left: 20px;
+}
+
+
+a {
+    display: inline-block;
+    top: 20%;
+    left: 30%;
+    height: 130px; /*sets height of element*/
+    background: rgb(85, 189, 249); /*sets the background of this element (here a solid colour)*/
+    /*transition: all 0.6s; sets a transition (for hover effect)*/
+    margin: auto;
+    width: 100%;
+    /*padding-left: 20px; /*sets 'padding'
+    padding-right: 20px; /*sets 'padding'*/
+    line-height: 0px; /*for this, it sets vertical alignment*/
+    }
+
+
+.cent {
+    margin: auto;
+    text-align: center;
+    }
+
+.title {
+    margin: auto;
+    padding-left: 510px;
+    }
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+
+ body {
+     background-color:rgb(158, 217, 250);
+    }
+
+.button {
+    position: absolute;
+    top: 35%;
+    left: 75%;
+    font-family: 'Montserrat';
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(85, 189, 249);
+    color: white;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.pbutton {
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    font-family: 'Montserrat';
+    padding: 20px 50px;
+    font-size: 35px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(85, 189, 249);
+    color: white;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.button:hover {
+    background-color: #1d8ac9;
+}
+
+.pbutton:hover {
+    background-color: #1d8ac9;
+}
+
